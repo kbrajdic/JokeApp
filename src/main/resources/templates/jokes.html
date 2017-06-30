@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Jokes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div class="container" style="margin-top:50px">
+	<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Vic</th>
+			<th>Likes</th>
+			<th>Dislikes</th>
+			<th>Razlika</th>
+			<th>Like</th>
+			<th>Dislike</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="joke,iteration : ${jokes}">
+			<td th:text="${iteration.count}+."></td>
+			<td th:text="${joke.content}"></td>
+			<td th:text="${joke.likes}" align="right"></td>
+			<td th:text="${joke.dislikes}" align="right"></td>
+			<td th:text="${joke.likes}-${joke.dislikes}" align="right"></td>
+			<td align="center">
+				<form th:action="@{/like/}+ ${joke.id}" th:method="put" >
+					<button class="btn btn-primary">Like</button>
+	   	 		</form>
+	   	 	</td>
+			<td align="center">
+				<form th:action="@{/dislike/}+ ${joke.id}" th:method="put">
+					<button class="btn btn-primary">Dislike</button>
+	   	 		</form>
+	   	 	</td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+</body>
+</html>
